@@ -1,4 +1,4 @@
-# PHP initial Project
+# PHP initial Project - Developers
 Main structure of php project. Folders / files:
 - **app**
   - **controllers**
