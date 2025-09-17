@@ -1,1 +1,7 @@
 content from the test/index.phtml file :)
+<a href="<?= $this->baseUrl() ?>/task/add">Add Task</a>
+
+<?php if (isset($this->task) && isset($this->task->id)): ?>
+    <a href="<?= $this->baseUrl() ?>/task/edit/<?= (int)$this->task->id ?>">Edit</a>
+    <a href="<?= $this->baseUrl() ?>/task/delete/<?= (int)$this->task->id ?>">Delete</a>
+<?php endif; ?>

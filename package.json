@@ -1,0 +1,34 @@
+{
+  "name": "phpinitialdemo",
+  "version": "1.0.0",
+  "description": "Main structure of php project. Folders / files: - **app**   - **controllers**   - **models**   - **views** - **config** - **lib**   - **base** - **web**",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tailwindcss -i ./resources/css/app.css -o ./web/css/tailwind.css --watch",
+    "build": "tailwindcss -i ./resources/css/app.css -o ./web/css/tailwind.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ascargo/S3.02.Developers-Team.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ascargo/S3.02.Developers-Team/issues"
+  },
+  "homepage": "https://github.com/ascargo/S3.02.Developers-Team#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.13",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.13"
+  }
+}
