@@ -1,1 +1,13 @@
+# Node / build
+/node_modules/
+/web/css/tailwind.css
+
+# Local data
 /data/tasks.json
+
+# OS junk
+.DS_Store
+app/.DS_Store
+
+# Logs / npm
+npm-debug.log*

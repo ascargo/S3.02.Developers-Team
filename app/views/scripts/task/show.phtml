@@ -1,0 +1,40 @@
+<div class="p-2">
+    <h2 class="text-xl font-semibold mb-2">
+        <?= htmlspecialchars($this->task->title ?? '') ?>
+    </h2>
+
+    <?php if (!empty($this->task->description)): ?>
+        <p class="text-gray-700 whitespace-pre-line mb-3">
+            <?= htmlspecialchars($this->task->description) ?>
+        </p>
+    <?php else: ?>
+        <p class="text-gray-500 mb-3">No description.</p>
+    <?php endif; ?>
+
+    <p class="text-sm text-gray-600 mb-4">
+        Status:
+        <span class="inline-block px-2 py-0.5 rounded bg-gray-100 text-gray-800">
+            <?= htmlspecialchars($this->task->status ?? 'To do') ?>
+        </span>
+        <?php if (!empty($this->task->created_by)): ?>
+            · Created by: <?= htmlspecialchars($this->task->created_by) ?>
+        <?php endif; ?>
+        <?php if (!empty($this->task->created_at)): ?>
+            · Created at: <?= htmlspecialchars($this->task->created_at) ?>
+        <?php endif; ?>
+    </p>
+
+    <div class="flex items-center gap-2">
+        <!-- Open EDIT as a modal; title becomes "Edit Task" -->
+        <a href="<?= $this->baseUrl() ?>/task/edit/<?= (int)($this->task->id ?? 0) ?>?partial=1"
+            data-modal
+            data-title="Edit Task"
+            class="px-4 py-2 rounded bg-amber-500 text-white hover:bg-amber-600">Edit</a>
+
+
+        <!-- Delete via AJAX (handled by the layout script's [data-delete] handler) -->
+        <a href="<?= $this->baseUrl() ?>/task/delete/<?= (int)($this->task->id ?? 0) ?>"
+            onclick="return confirm('Delete task &quot;<?= htmlspecialchars($this->task->title ?? '') ?>&quot;?');"
+            class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">Delete</a>
+    </div>
+</div>

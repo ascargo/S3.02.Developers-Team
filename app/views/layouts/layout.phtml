@@ -1,11 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My ToDo App</title>
+	<link href="<?= $this->baseUrl() ?>/css/tailwind.css" rel="stylesheet">
 </head>
-<body>
-	<?php echo $this->content(); ?>
+
+<body class="bg-gray-50 text-gray-900">
+	<header class="bg-gray-800 text-white p-4">
+		<div class="max-w-4xl mx-auto flex justify-between">
+			<h1 class="text-xl font-bold">
+				<a href="<?= $this->baseUrl() ?>/task">My ToDo App</a>
+			</h1>
+			<nav>
+				<a href="<?= $this->baseUrl() ?>/task/add" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded">Add Task</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="max-w-4xl mx-auto mt-6 p-4">
+		<?php echo $this->content(); ?>
+	</main>
+	<!-- Modal -->
+	<div id="modalOverlay" class="fixed inset-0 bg-black/40 hidden items-center justify-center p-4 z-50">
+		<div class="bg-white rounded shadow-xl max-w-xl w-full max-h-[80vh] overflow-auto">
+			<div class="flex justify-between items-center p-3 border-b">
+				<h3 id="modalTitle" class="font-semibold">Details</h3>
+				<button id="modalClose" class="px-2 py-1 rounded border text-sm">Close</button>
+			</div>
+			<div id="modalBody" class="p-4">
+			</div>
+		</div>
+	</div>
+
+	<footer class="text-center text-gray-500 text-sm mt-6 p-4">
+		&copy; <?= date('Y') ?> My ToDo App
+	</footer>
+
+	<script>
+		(function() {
+			const overlay = document.getElementById('modalOverlay');
+			const body = document.getElementById('modalBody');
+			const titleEl = document.getElementById('modalTitle');
+			const closeBtn = document.getElementById('modalClose');
+
+			function openModalFrom(url, title) {
+				titleEl.textContent = title || 'Details';
+				body.innerHTML = '<div class="p-6 text-center text-gray-600">Loading…</div>';
+				overlay.classList.remove('hidden');
+				fetch(url + (url.includes('?') ? '&' : '?') + 'partial=1')
+					.then(r => r.text())
+					.then(html => {
+						body.innerHTML = html;
+					})
+					.catch(() => {
+						body.innerHTML = '<div class="p-6 text-red-800">Failed to load.</div>';
+					});
+			}
+
+			function closeModal() {
+				overlay.classList.add('hidden');
+				body.innerHTML = '';
+			}
+
+			closeBtn.addEventListener('click', closeModal);
+			overlay.addEventListener('click', (e) => {
+				if (e.target === overlay) closeModal();
+			});
+
+			document.addEventListener('click', function(e) {
+				const a = e.target.closest('[data-modal]');
+				if (!a) return;
+				const href = a.getAttribute('href');
+				if (!href || href === '#') return;
+				e.preventDefault();
+				openModalFrom(href, a.getAttribute('data-title') || a.textContent.trim());
+			});
+			document.addEventListener('click', function(e) {
+				const a = e.target.closest('[data-delete]');
+				if (!a) return;
+
+				e.preventDefault();
+				if (!confirm('Delete this task?')) return;
+
+				const href = a.getAttribute('href');
+				const url = href + (href.includes('?') ? '&' : '?') + 'ajax=1';
+
+				fetch(url, {
+						headers: {
+							'Accept': 'application/json'
+						}
+					})
+					.then(r => r.json())
+					.then(data => {
+						if (data && data.ok) {
+							closeModal();
+							window.location.href = '<?= WEB_ROOT ?>' + '/task';
+						} else {
+							alert((data && data.error) || 'Failed to delete the task.');
+						}
+					})
+					.catch(() => alert('Failed to delete the task.'));
+			});
+		})();
+	</script>
+
 </body>
+
 </html>

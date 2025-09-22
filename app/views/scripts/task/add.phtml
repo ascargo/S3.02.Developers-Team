@@ -1,0 +1,56 @@
+<div class="max-w-xl mx-auto p-4">
+  <h1 class="text-2xl font-semibold mb-4">Add Task</h1>
+
+  <?php if (!empty($this->error)): ?>
+    <div class="mb-4 p-3 rounded bg-red-100 text-red-800">
+      <?= htmlspecialchars($this->error) ?>
+    </div>
+  <?php endif; ?>
+
+  <form action="<?= $this->baseUrl() ?>/task/create" method="post" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium mb-1">Title *</label>
+      <input
+        type="text"
+        name="title"
+        required
+        value="<?= isset($this->formData['title']) ? htmlspecialchars($this->formData['title']) : '' ?>"
+        class="w-full border rounded px-3 py-2"
+      >
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Description</label>
+      <textarea
+        name="description"
+        rows="4"
+        class="w-full border rounded px-3 py-2"
+      ><?= isset($this->formData['description']) ? htmlspecialchars($this->formData['description']) : '' ?></textarea>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Created by</label>
+      <input
+        type="text"
+        name="created_by"
+        value="<?= isset($this->formData['created_by']) ? htmlspecialchars($this->formData['created_by']) : '' ?>"
+        class="w-full border rounded px-3 py-2"
+      >
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Status</label>
+      <?php $current = isset($this->formData['status']) ? $this->formData['status'] : 'To do'; ?>
+      <select name="status" class="w-full border rounded px-3 py-2">
+        <?php foreach (['To do','In progress','Done'] as $opt): ?>
+          <option value="<?= $opt ?>" <?= $opt === $current ? 'selected' : '' ?>><?= $opt ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">Create</button>
+      <a href="<?= $this->baseUrl() ?>/task" class="px-4 py-2 rounded border">Cancel</a>
+    </div>
+  </form>
+</div>
