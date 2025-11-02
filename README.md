@@ -1,83 +1,103 @@
-# PHP initial Project - Developers
-Main structure of php project. Folders / files:
-- **app**
-  - **controllers**
-  - **models**
-  - **views**
-- **config**
-- **lib**
-  - **base**
-- **web**
+# 📝 TO-DO List Application (PHP MVC)
 
-### Usage
+## 📄 Description – Exercise Statement
 
-The web/index.php is the heart of the system.
-This means that your web applications root folder is the “web” folder.
+This project is part of a Full Stack Developer Bootcamp. The goal is to build a **To-Do List** application using the MVC architecture pattern in PHP.
 
-All requests go through this file and it decides how the routing of the app
-should be.
-You can add additional hooks in this file to add certain routes.
+The application allows users to:
 
-### Project Structure
+- Create tasks
+- View all tasks or a specific one
+- Update tasks
+- Delete tasks
 
-The root of the project holds a few directories:
-**/app** This is the folder where your magic will happen. Use the views, controllers and models folder for your app code.
-**/config** this folder holds a few configuration files. Currently only the connection to the database.
-**/lib** This is where you should put external libraries and other external files.
-**/lib/base** The library files. Don’t change these :)
-**/web** This folder holds files that are to be “downloaded” from your app. Stylesheets, javascripts and images used. (and more of course)
+Each task includes a title, description, status (Pending, In Progress, Completed), timestamps (start and end), and the user who created it.
 
-The system uses a basic MVC structure, with your web app’s files located in the
-“app” folder.
+This project follows Gitflow, is developed collaboratively via GitHub, and evolves across 3 levels of data persistence (only JSON file available for now):
 
-#### app/controllers
-Your application’s controllers should be defined here.
+1. **JSON file**
+2. **MySQL database**
+3. **MongoDB (optional final stage)**
 
-All controller names should end with “Controller”. E.g. TestController.
-All controllers should inherit the library’s “Controller” class.
-However, you should generally just make an ApplicationController, which extends
-the Controller. Then you can defined beforeFilters etc in that, which will get run
-at every request.
+---
 
-#### app/models
-Models handles database interaction etc.
+## 💻 Technologies Used
 
-All models should inherit from the Model class, which provides basic functionality.
-The Model class handles basic functionality such as:
+- PHP 7+
+- MVC Architecture (custom framework)
+- MySQL (PDO)
+- Tailwind CSS
+- Git & Gitflow
+- JSON (for Level 1 persistence)
+- Apache (via XAMPP or similar)
+- HTML & basic JavaScript
 
-Setting up a database connection (using PDO)
-fetchOne(ID)
-save(array) → both update/create
-delete(ID)
-app/views
-Your view files.
-The structure is made so that having a controller named TestController, it looks
-in the app/views/test/ folder for it’s view files.
+---
 
-All view files end with .phtml
-Having an action in the TestController called index, the view file
-app/views/test/index.phtml will be rendered as default.
+## 📋 Requirements
 
-#### config/routes.php
-Your routes around the system needs to be defined here.
-A route consists of the URL you want to call + the controller#action you want it
-to hit.
+- PHP ≥ 7.4
+- Composer
+- MySQL ≥ 8.0 (for Level 2)
+- Node.js (only for Tailwind build)
+- XAMPP or another local server
+- Git (with Gitflow if possible)
 
-An example is:
-$routes = array(
-‘/test’ => ‘test#index’ // this will hit the TestController’s indexAction method.
-);
+Optional:
 
-#### Error handling
-A general error handling has been added.
+- MongoDB (for Level 3)
 
-If a route doesn’t exist, then the error controller is hit.
-If some other exception was thrown, the error controller is hit.
-As default, the error controller just shows the exception occured, so remember
-to style the error controller’s view file (app/views/error/error.phtml)
+---
 
+## 🛠️ Installation
 
-### Utilities
-- [PHP Developers Guide](https://www.php.net/manual/en/index.php).
-- .gitignore file configuration. [See Official Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
-- Git branches. [See Official Docs](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell).
+1. **Clone the repository**
+   git clone https://github.com/ascargo/S3.02.Developers-Team.git
+   Go to the project directory
+
+cd your-todo-project
+Set up Tailwind CSS
+
+npm install
+npx tailwindcss -i ./public/input.css -o ./public/output.css --watch
+Set up database connection (if using MySQL)
+Edit config/settings.ini with your MySQL credentials.
+
+(Optional) Start local server
+If using XAMPP, place the folder in:
+
+/Applications/XAMPP/xamppfiles/htdocs/
+and run the server from the control panel.
+
+▶️ Execution
+Go to http://localhost/your-todo-project/public in your browser.
+
+You will see the task list, and can use the UI to add, edit, or delete tasks.
+
+🌐 Deployment
+To deploy the project in a production environment:
+
+Upload project files to your server (e.g., using FTP).
+
+Configure settings.ini with production database credentials.
+
+Ensure the server supports PHP and has MySQL or MongoDB installed.
+
+Set up proper permissions for file writing (for JSON persistence if used).
+
+Point your domain to the /public directory of the project.
+
+🤝 Contributions
+Contributions are welcome! Please follow these steps:
+
+Fork the repository
+
+Create a new branch:
+git checkout -b feature/NewFeature
+
+Make your changes and commit:
+git commit -m 'Add New Feature'
+
+Push your changes:
+git push origin feature/NewFeature
+Open a Pull Request for review
