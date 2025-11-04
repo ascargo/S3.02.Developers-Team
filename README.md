@@ -2,102 +2,75 @@
 
 ## 📄 Description – Exercise Statement
 
-This project is part of a Full Stack Developer Bootcamp. The goal is to build a **To-Do List** application using the MVC architecture pattern in PHP.
+This project is a PHP MVC application developed as part of the Developers Team exercise part of a Full Stack Developer Bootcamp. It allows users to manage a list of tasks, including adding, viewing, updating and deleting them.
+The app stores task data in a JSON file and displays them in three columns: To do, In progress, and Done.
+It aims to practise object-oriented PHP, MVC architecture, routing, and file persistence.
 
-The application allows users to:
+💻 Technologies Used
 
-- Create tasks
-- View all tasks or a specific one
-- Update tasks
-- Delete tasks
+PHP (Object-Oriented Programming, MVC pattern)
+HTML & CSS
+Tailwind CSS (styling framework)
+JSON (for local data persistence)
+Apache (via XAMPP for local server)
+Git & GitHub (version control)
 
-Each task includes a title, description, status (Pending, In Progress, Completed), timestamps (start and end), and the user who created it.
+📋 Requirements
 
-This project follows Gitflow, is developed collaboratively via GitHub, and evolves across 3 levels of data persistence (only JSON file available for now):
+To run this project locally, you need:
+PHP ≥ 8.0
+Apache (included with XAMPP or MAMP)
+A web browser
+Git (for cloning the repository)
 
-1. **JSON file**
-2. **MySQL database**
-3. **MongoDB (optional final stage)**
+🛠️ Installation
 
----
+Clone the repository
+git clone https://github.com/ascargo/S3.02.Developers-Team.git
 
-## 💻 Technologies Used
+Move the project to your server root
+For example, on macOS with XAMPP: /Applications/XAMPP/xamppfiles/htdocs/
 
-- PHP 7+
-- MVC Architecture (custom framework)
-- MySQL (PDO)
-- Tailwind CSS
-- Git & Gitflow
-- JSON (for Level 1 persistence)
-- Apache (via XAMPP or similar)
-- HTML & basic JavaScript
+If there are any issues with saving the task this steps might help:
+Create the data folder if missing
+mkdir -p data
+echo "[]" > data/tasks.json
 
----
+Ensure write permissions
+chmod 777 data
+chmod 666 data/tasks.json
 
-## 📋 Requirements
+Execution
 
-- PHP ≥ 7.4
-- Composer
-- MySQL ≥ 8.0 (for Level 2)
-- Node.js (only for Tailwind build)
-- XAMPP or another local server
-- Git (with Gitflow if possible)
+Start Apache from your XAMPP (or MAMP) control panel.
 
-Optional:
+Open your browser and go to:
+http://localhost/<folder-name>/web
+for example, as my project is saved in cursoPHP folder:
+http://localhost/cursoPHP/S3.02.Developers-Team/web/
 
-- MongoDB (for Level 3)
-
----
-
-## 🛠️ Installation
-
-1. **Clone the repository**
-   git clone https://github.com/ascargo/S3.02.Developers-Team.git
-   Go to the project directory
-
-cd your-todo-project
-Set up Tailwind CSS
-
-npm install
-npx tailwindcss -i ./public/input.css -o ./public/output.css --watch
-Set up database connection (if using MySQL)
-Edit config/settings.ini with your MySQL credentials.
-
-(Optional) Start local server
-If using XAMPP, place the folder in:
-
-/Applications/XAMPP/xamppfiles/htdocs/
-and run the server from the control panel.
-
-▶️ Execution
-Go to http://localhost/your-todo-project/public in your browser.
-
-You will see the task list, and can use the UI to add, edit, or delete tasks.
+The application should display the three task columns.
+You can now add, edit, and delete tasks directly from the interface.
 
 🌐 Deployment
-To deploy the project in a production environment:
 
-Upload project files to your server (e.g., using FTP).
-
-Configure settings.ini with production database credentials.
-
-Ensure the server supports PHP and has MySQL or MongoDB installed.
-
-Set up proper permissions for file writing (for JSON persistence if used).
-
-Point your domain to the /public directory of the project.
+To deploy the app to a production environment:
+Upload all project files to your web server (e.g., /var/www/html/).
+Make sure the web server user (e.g., www-data) has write access to /data/tasks.json.
+Confirm your server runs PHP 8 or later.
+Access the deployed app via your server’s domain or IP address.
 
 🤝 Contributions
-Contributions are welcome! Please follow these steps:
 
-Fork the repository
+Contributions are welcome. Please follow these steps:
+Fork the repository.
 
-Create a new branch:
+Create a new branch for your feature:
 git checkout -b feature/NewFeature
 
-Make your changes and commit:
-git commit -m 'Add New Feature'
+Commit your changes:
+git commit -m "Add NewFeature"
 
-Push your changes:
+Push the branch:
 git push origin feature/NewFeature
-Open a Pull Request for review
+Open a Pull Request and describe your update clearly.
