@@ -25,14 +25,12 @@
     </p>
 
     <div class="flex items-center gap-2">
-        <!-- Open EDIT as a modal; title becomes "Edit Task" -->
         <a href="<?= $this->baseUrl() ?>/task/edit/<?= (int)($this->task->id ?? 0) ?>?partial=1"
             data-modal
             data-title="Edit Task"
             class="px-4 py-2 rounded bg-amber-500 text-white hover:bg-amber-600">Edit</a>
 
 
-        <!-- Delete via AJAX (handled by the layout script's [data-delete] handler) -->
         <a href="<?= $this->baseUrl() ?>/task/delete/<?= (int)($this->task->id ?? 0) ?>"
             onclick="return confirm('Delete task &quot;<?= htmlspecialchars($this->task->title ?? '') ?>&quot;?');"
             class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">Delete</a>

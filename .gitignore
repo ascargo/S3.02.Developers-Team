@@ -1,9 +1,5 @@
 # Node / build
 /node_modules/
-/web/css/tailwind.css
-
-# Local data
-/data/tasks.json
 
 # OS junk
 .DS_Store
